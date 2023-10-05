@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  backend:
+    build: ./morpherApp
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "5566:80"
+

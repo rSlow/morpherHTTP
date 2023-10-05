@@ -1,0 +1,4 @@
+fastapi==0.103.2
+pytrovich==0.0.4
+pymorphy2==0.9.1
+uvicorn==0.23.2
