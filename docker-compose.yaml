@@ -3,9 +3,11 @@ version: "3"
 services:
   backend:
     build: ./morpherApp
+    restart: always
 
   nginx:
     build: ./nginx
+    restart: always
     ports:
       - "5566:80"
 
