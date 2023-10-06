@@ -10,16 +10,16 @@ morph_router = APIRouter(prefix="/morph")
 case_idx_body = Body(ge=1, le=6)
 
 
-@morph_router.get("/post")
+@morph_router.post("/post")
 async def morph_post_handler(post: str = Body(),
                              case_idx: int = case_idx_body):
-    return morph_post(
+    return {"morphed_post": morph_post(
         post=post,
         case=CommonCase[HTTPCase[case_idx]]
-    )
+    )}
 
 
-@morph_router.get("/post/all")
+@morph_router.post("/post/all")
 async def morph_post_handler(post: str = Body(embed=True)):
     return {
         i: morph_post(
@@ -30,22 +30,22 @@ async def morph_post_handler(post: str = Body(embed=True)):
     }
 
 
-@morph_router.get("/fio")
+@morph_router.post("/fio")
 async def morph_fio_handler(
         fio: str = Body(),
         case_idx: int = case_idx_body,
         gender: Optional[PytrovichGender] = Body(default=None),
         content_order: str = Body(default="fio")
 ):
-    return morph_fio(
+    return {"morphed_fio": morph_fio(
         fio=fio,
         case=CommonCase[HTTPCase[case_idx]],
         gender=gender,
         content_order=content_order
-    )
+    )}
 
 
-@morph_router.get("/fio/all")
+@morph_router.post("/fio/all")
 async def morph_fio_handler(
         fio: str = Body(),
         gender: Optional[PytrovichGender] = Body(default=None),
