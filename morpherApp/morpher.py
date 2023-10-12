@@ -33,14 +33,15 @@ def morph_post(post: str, case: CommonCase):
 
 def morph_fio(fio: str,
               case: CommonCase,
-              gender: Optional[PytrovichGender],
-              content_order: str):
+              content_order: str,
+              gender: Optional[PytrovichGender] = None):
     if case == CommonCase.nomn:
         return fio
 
     orig_fio_list = fio.split()
     orig_fio_dict = {content_part: orig_fio_list[i]
                      for i, content_part in enumerate(content_order)}
+    other_fio_part = orig_fio_list[len(orig_fio_dict.keys()):]
     pytrovich_case = PytrovichAliasCase[case.value].value
 
     if gender is None:
@@ -50,12 +51,14 @@ def morph_fio(fio: str,
             middlename=orig_fio_dict.get("o"),
         )
 
-    return " ".join([
-        pet.make(
-            NamePartAlias[content_part].value,
-            gender,
-            pytrovich_case,
-            fio_part
-        )
-        for content_part, fio_part in orig_fio_dict.items()
-    ])
+    return " ".join(
+        [
+            pet.make(
+                NamePartAlias[content_part].value,
+                gender,
+                pytrovich_case,
+                fio_part
+            )
+            for content_part, fio_part in orig_fio_dict.items()
+        ] + other_fio_part
+    )
