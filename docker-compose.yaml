@@ -4,6 +4,8 @@ services:
   backend:
     build: ./morpherApp
     restart: always
+    env_file:
+      - ./.env
 
   nginx:
     build: ./nginx
