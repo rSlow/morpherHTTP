@@ -12,6 +12,7 @@ services:
     restart: always
     ports:
       - "5566:443"
+      - "5666:80"
     volumes:
       - ${CERTS_DIR}:/data/certs/:ro
     env_file:
