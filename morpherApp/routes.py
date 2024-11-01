@@ -6,7 +6,7 @@ from pytrovich.enums import Gender as PytrovichGender
 from enums import CommonCase, HTTPCase
 from morpher import morph_post, morph_fio
 
-morph_router = APIRouter(prefix="/morph")
+morph_router = APIRouter()
 case_idx_body = Body(ge=1, le=6)
 
 
