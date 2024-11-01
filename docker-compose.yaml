@@ -1,20 +1,8 @@
-version: "3"
-
 services:
   backend:
     build: ./morpherApp
-    restart: always
-    env_file:
-      - ./.env
-
-  nginx:
-    build: ./nginx
-    restart: always
     ports:
-      - "5566:443"
-      - "5666:80"
-    volumes:
-      - ${CERTS_DIR}:/data/certs/:ro
+      - "127.0.0.1:${EXPOSE_MORPH}:8000"
+    restart: always
     env_file:
-      - ./.env
-
+      - .env
